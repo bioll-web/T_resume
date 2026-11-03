@@ -7,7 +7,7 @@
 <meta name="description" content="谭佳庆的交互式个人简历：通过档案机浏览个人介绍、项目经历、技术栈、兴趣与研究方向。" />
 <title>谭佳庆 · PERSONAL ARCHIVE / 交互式简历</title>
 <style>
-:root{--paper:#fff;--ink:#0d0d0d;--brand:#858be7;--surface:#f7f7f7;--line:#dedede;--fg:var(--ink);--bg:var(--paper);--border:var(--ink);--muted:#525252;--plate:#efeffc;--shadow:3px 3px 0 var(--border);--purple-deep:#51469a;--ok:#67b79b;--accent:#858be7;--mint:#67b79b;--blue:#6ca9de;--orange:#e29958;--rose:#de77a8;--yellow:#f0cc63;--mono:Consolas,'Cascadia Code','SFMono-Regular',monospace;--sans:'PingFang SC','Microsoft YaHei UI','Noto Sans CJK SC',system-ui,sans-serif;--reel-height:134px}
+:root{--paper:#fff;--ink:#0d0d0d;--brand:#858be7;--surface:#f7f7f7;--line:#dedede;--fg:var(--ink);--bg:var(--paper);--border:var(--ink);--muted:#525252;--plate:#efeffc;--shadow:3px 3px 0 var(--border);--purple-deep:#51469a;--ok:#67b79b;--accent:#858be7;--success:oklch(65.05554% .1233352 160.06440);--danger:oklch(62.55653% .1933399 23.02607);--violet:oklch(64.26298% .1721807 296.05834);--cyan:oklch(69.81469% .0986988 207.16961);--amber:oklch(69.38645% .1206339 73.68509);--coral:oklch(64.75902% .1415902 26.94194);--blue:oklch(65.35671% .1169872 253.82619);--mint:var(--success);--orange:var(--amber);--rose:var(--coral);--yellow:var(--amber);--mono:Consolas,'Cascadia Code','SFMono-Regular',monospace;--sans:'PingFang SC','Microsoft YaHei UI','Noto Sans CJK SC',system-ui,sans-serif;--reel-height:134px}
 :root[data-theme="dark"]{--bg:#0d0d0d;--fg:#fff;--border:#fff;--surface:#242424;--line:#424242;--muted:#c4c4c4;--plate:#20213b;--shadow:3px 3px 0 var(--border);color-scheme:dark}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:92px}body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}button,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible{outline:3px solid var(--brand);outline-offset:4px}::selection{background:var(--brand);color:#0d0d0d}svg{display:block}h1,h2,h3,p{margin:0}p{line-height:1.85}.mono{font-family:var(--mono)}.tiny{font-size:11px;letter-spacing:.12em}.muted{color:var(--muted)}.skip-link{position:absolute;top:-100px;left:12px;z-index:99;padding:10px;background:var(--brand);color:#0d0d0d}.skip-link:focus{top:10px}
 .shell{width:min(1230px,calc(100% - 72px));margin:auto}.bar{height:78px;position:sticky;top:0;z-index:25;background:var(--bg);border-bottom:2px solid var(--border)}.bar-inner{height:100%;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand-link{display:flex;align-items:center;gap:12px;flex-shrink:0}.brand-mark{display:grid;place-items:center;width:38px;height:38px;background:var(--brand);border:2px solid #0d0d0d;box-shadow:3px 3px 0 var(--border);border-radius:8px;transform:rotate(-5deg);color:#0d0d0d;font-weight:900;font-size:19px}.brand-name{font-size:18px;font-weight:850;letter-spacing:-.04em}.brand-caption{font:10px/1.6 var(--mono);letter-spacing:.13em;color:var(--muted)}.nav{display:flex;align-items:center;gap:25px}.nav a{font-size:12px;font-weight:700}.nav a:hover{color:var(--purple-deep)}.theme-btn{min-height:38px;background:var(--bg);border:2px solid var(--border);border-radius:7px;padding:0 13px;color:var(--fg);font:11px var(--mono)}
@@ -52,16 +52,71 @@ html[data-theme="dark"] .text-action:hover{color:var(--brand)}
 .reel-cell[data-category="research"] .symbol-icon{stroke:#236f59}
 .reel-cell .symbol-name{font-weight:900;color:#0d0d0d;letter-spacing:.09em}
 @media(max-width:760px){#machine{padding-top:18px}.machine-main{gap:7px}.lever-label{font-size:10px}.action-row{justify-content:space-between;gap:9px}.text-action{font-size:12px}}
+
+/* Exact Cross(s)ing System Board 02 semantic colour roles. No arbitrary palette. */
+.reel-cell[data-category="profile"]{--tile:var(--coral)}
+.reel-cell[data-category="works"]{--tile:var(--violet)}
+.reel-cell[data-category="skills"]{--tile:var(--blue)}
+.reel-cell[data-category="interests"]{--tile:var(--amber)}
+.reel-cell[data-category="research"]{--tile:var(--cyan)}
+.reel-cell:before{background:var(--tile)!important;left:9px;right:9px;top:9px;bottom:9px;border:2px solid #0d0d0d;border-radius:11px;box-shadow:3px 3px 0 #0d0d0d;opacity:1}
+.reel-cell .symbol-icon{stroke:#0d0d0d!important;stroke-width:2.2;width:56px;height:56px;filter:none}
+.reel-cell .symbol-name{font-size:10px;background:#fff;color:#0d0d0d;padding:3px 7px;letter-spacing:.1em;border:1.5px solid #0d0d0d;border-radius:3px}
+.archive-btn[data-open="profile"].active .archive-symbol{background:var(--coral)}
+.archive-btn[data-open="works"].active .archive-symbol{background:var(--violet)}
+.archive-btn[data-open="skills"].active .archive-symbol{background:var(--blue)}
+.archive-btn[data-open="interests"].active .archive-symbol{background:var(--amber)}
+.archive-btn[data-open="research"].active .archive-symbol{background:var(--cyan)}
+.machine-badge{background:var(--success)}
+.machine-screen{background:var(--surface)}
+.reels:after{background:var(--fg);height:2px;opacity:.4}
+/* A physical lever with a track, constrained travel and damped spring rebound. */
+.lever-area{min-width:110px;position:relative}
+.lever{--pull:0;--resistance:0;display:block;position:relative;width:104px;height:220px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;overflow:visible;outline-offset:5px}
+.lever:disabled{cursor:wait;opacity:1}
+.lever.dragging{cursor:grabbing}
+.lever::before{content:"";position:absolute;top:20px;left:42px;width:21px;height:154px;border:2px solid var(--border);border-radius:16px;background:var(--surface);box-shadow:inset 3px 0 0 var(--line)}
+.lever-base{position:absolute;bottom:19px;left:18px;width:68px;height:33px;border-radius:9px;background:var(--fg);box-shadow:3px 3px 0 var(--border);z-index:1}
+.lever-rail{position:absolute;bottom:49px;left:45px;width:15px;height:119px;background:var(--fg);border:2px solid var(--border);border-radius:8px;transform-origin:50% 100%;transform:rotate(calc(-23deg + var(--pull)*23deg)) scaleY(calc(1 - var(--pull)*.26));transition:transform 580ms cubic-bezier(.2,1.65,.23,1);z-index:2}
+.lever-knob{position:absolute;left:21px;top:6px;width:63px;height:63px;border:3px solid #0d0d0d;border-radius:50%;background:var(--coral);box-shadow:5px 5px 0 #0d0d0d, inset -7px -8px 0 rgba(13,13,13,.13);transform:translateY(calc(var(--pull)*100px)) scale(calc(1 - var(--pull)*.10));transition:transform 620ms cubic-bezier(.15,1.65,.28,1),background .14s;z-index:4}
+.lever-knob::after{content:"";position:absolute;left:15px;top:10px;height:14px;width:15px;border-radius:50%;background:#fff;opacity:.65}
+.lever.dragging .lever-knob,.lever.dragging .lever-rail{transition:none}
+.lever:focus-visible .lever-knob{outline:3px solid var(--violet);outline-offset:5px}
+.lever-label{text-transform:none;font-size:11px;letter-spacing:0;font-weight:800;white-space:nowrap}
+.lever-hint{font-size:10px;color:var(--muted);line-height:1.5;text-align:center}
+.lever-area::before{content:"↓";position:absolute;right:-5px;top:64px;font:700 27px var(--mono);color:var(--coral);pointer-events:none}
+.machine-main{grid-template-columns:minmax(0,1fr) 116px}
+.machine.revealed .machine-screen{animation:machine-hit .58s ease-in-out}
+@keyframes machine-hit{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 5px var(--success)}65%{box-shadow:0 0 0 2px var(--brand)}}
+/* The lever must remain visible and usable on mobile too. */
+@media(max-width:760px){
+ .machine-main{display:grid;grid-template-columns:minmax(0,1fr) 77px;gap:10px;padding:16px 12px}
+ .lever-area{display:flex;min-width:0;gap:4px}
+ .lever{transform:scale(.70);transform-origin:center;height:160px;margin:-18px -15px -25px;width:104px;flex-shrink:0}
+ .lever-label{display:none}
+ .lever-area::before{display:none}
+ .lever-hint{display:none}
+ .machine-screen{padding:7px}
+ .reels{gap:5px}
+ .reel-cell:before{left:4px;right:4px;top:8px;bottom:8px;box-shadow:1px 1px 0 #0d0d0d}
+ .reel-cell .symbol-icon{width:39px;height:39px}
+ .reel-cell .symbol-name{font-size:7px;letter-spacing:0;padding:2px 3px}
+ .machine-header{padding:15px 12px}
+ .machine-badge{font-size:9px}
+}
+@media(max-width:400px){.lever{transform:scale(.62);margin:-18px -20px -25px}.machine-main{grid-template-columns:minmax(0,1fr) 62px;gap:7px}.reel-cell .symbol-icon{width:33px;height:33px}}
+@media(prefers-reduced-motion:reduce){.lever-knob,.lever-rail{transition-duration:.01ms!important}.machine.revealed .machine-screen{animation:none}}
+
 </style>
 </head>
 <body>
 <a class="skip-link" href="#archives">跳过动画，直接查看档案</a>
 <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><defs>
-<symbol id="sym-profile" viewBox="0 0 48 48"><circle cx="24" cy="14" r="9"/><path d="M9 42c0-10 7-16 15-16s15 6 15 16H9Z"/></symbol>
-<symbol id="sym-works" viewBox="0 0 48 48"><rect x="4" y="6" width="15" height="15" rx="2"/><rect x="29" y="6" width="15" height="15" rx="2"/><rect x="16.5" y="30" width="15" height="15" rx="2"/><path d="M19 13h10M11.5 21v5h13v4M36.5 21v5h-12"/></symbol>
-<symbol id="sym-skills" viewBox="0 0 48 48"><path d="M24 3 5 13l19 10 19-10L24 3ZM5 23l19 10 19-10M5 33l19 10 19-10"/></symbol>
-<symbol id="sym-interests" viewBox="0 0 48 48"><path d="m24 4 4.2 13.8L42 22l-13.8 4.2L24 40l-4.2-13.8L6 22l13.8-4.2L24 4Z"/><path d="M37 36v9M32.5 40.5h9"/></symbol>
-<symbol id="sym-research" viewBox="0 0 48 48"><circle cx="24" cy="23" r="4"/><ellipse cx="24" cy="23" rx="20" ry="8" transform="rotate(36 24 23)"/><ellipse cx="24" cy="23" rx="20" ry="8" transform="rotate(-36 24 23)"/><path d="M24 3v8M24 35v10"/></symbol>
+<symbol id="sym-profile" viewBox="0 0 48 48"><circle cx="24" cy="15" r="8"/><path d="M8 43v-4c0-8 7-14 16-14s16 6 16 14v4H8Z"/><path d="M16 34h16"/><circle cx="37" cy="11" r="5" fill="#fff"/></symbol>
+<symbol id="sym-works" viewBox="0 0 48 48"><rect x="5" y="6" width="17" height="14" rx="3"/><rect x="27" y="6" width="16" height="14" rx="3"/><rect x="15" y="29" width="19" height="14" rx="3"/><path d="M13 20v5h11v4M35 20v5H24"/><circle cx="13" cy="13" r="3" fill="#fff"/><circle cx="35" cy="13" r="3" fill="#fff"/></symbol>
+<symbol id="sym-skills" viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="29" rx="4"/><path d="M15 18l-6 5 6 5M33 18l6 5-6 5M28 16l-8 15M16 43h16M24 37v6"/><circle cx="24" cy="9" r="2" fill="#fff"/></symbol>
+<symbol id="sym-interests" viewBox="0 0 48 48"><path d="M24 4l5.3 14.7L44 24l-14.7 5.3L24 44l-5.3-14.7L4 24l14.7-5.3L24 4Z"/><circle cx="24" cy="24" r="6" fill="#fff"/><path d="M37 6v9M32.5 10.5h9"/></symbol>
+<symbol id="sym-research" viewBox="0 0 48 48"><circle cx="24" cy="24" r="5" fill="#fff"/><ellipse cx="24" cy="24" rx="20" ry="9" transform="rotate(38 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="9" transform="rotate(-38 24 24)"/><circle cx="9" cy="12" r="3" fill="#fff"/><circle cx="39" cy="12" r="3" fill="#fff"/></symbol>
 <symbol id="sym-book" viewBox="0 0 48 48"><path d="M24 10c-6-4-14-4-20-2v29c8-2 15-1 20 3 5-4 12-5 20-3V8c-6-2-14-2-20 2Zm0 0v30"/></symbol>
 <symbol id="sym-chat" viewBox="0 0 48 48"><path d="M7 8h34v27H21L11 44v-9H7V8Z"/><path d="M14 18h20M14 25h15"/></symbol>
 <symbol id="sym-pen" viewBox="0 0 48 48"><path d="m8 34 25-25 7 7-25 25-10 2 3-9ZM28 14l7 7M5 6h17M5 12h10"/></symbol>
@@ -69,7 +124,7 @@ html[data-theme="dark"] .text-action:hover{color:var(--brand)}
 </defs></svg>
 <header class="bar"><div class="shell bar-inner"><a class="brand-link" href="#top" aria-label="回到顶部"><span class="brand-mark">T.</span><span><span class="brand-name">TAN JIAQING</span><span class="brand-caption" style="display:block">INTERACTIVE RESUME / 2026</span></span></a><nav class="nav" aria-label="页面导航"><a href="#machine">开始</a><a href="#archives">个人档案</a><a href="#contact">联系我</a><button class="theme-btn" id="themeButton" type="button" aria-label="切换日夜主题">◐ NIGHT MODE</button></nav></div></header>
 <main id="top"><section id="machine" class="shell" aria-labelledby="machine-title"><div class="section-intro"><div><p class="section-kicker">01 / TRY IT</p><h2 class="section-title" id="machine-title">拉一下，认识我。</h2></div><p class="section-aside">往下拉拉杆，松手后转轮就会开始转。三个图案对齐，会打开一页新档案。</p></div>
-<div class="machine"><div class="machine-header"><div><div class="machine-title">PERSONAL ARCHIVE DEVICE <span class="mono muted">/ V1.1</span></div><div class="machine-subtitle">PULL · RELEASE · DISCOVER</div></div><span class="machine-badge">● PULL TO START</span></div><div class="machine-main"><div class="machine-screen"><div class="screen-meta"><span>REEL 01 / 02 / 03</span><strong>PULL TO EXPLORE</strong></div><div class="reels" id="reels" aria-label="三个档案图案滚轮"><div class="reel"><div class="reel-track" id="reel0"></div></div><div class="reel"><div class="reel-track" id="reel1"></div></div><div class="reel"><div class="reel-track" id="reel2"></div></div></div></div><div class="lever-area"><button id="lever" class="lever" type="button" aria-label="向下拖动拉杆，松开后开始抽取" title="向下拉动，松开后转动"><span class="lever-base"></span><span class="lever-rail"></span><span class="lever-knob"></span></button><span class="lever-label">往下拉 ↓</span></div></div><div class="machine-bottom"><div class="machine-message"><span class="status-light"></span><span id="machineStatus" role="status" aria-live="polite">试着往下拉拉杆，松手即可开始。</span></div><span class="machine-count" id="machineCounter">UNLOCKED 0 / 5</span></div></div>
+<div class="machine"><div class="machine-header"><div><div class="machine-title">PERSONAL ARCHIVE <span class="mono muted">/ 02</span></div><div class="machine-subtitle">PULL · RELEASE · DISCOVER</div></div><span class="machine-badge">● PULL TO START</span></div><div class="machine-main"><div class="machine-screen"><div class="screen-meta"><span>REEL 01 / 02 / 03</span><strong>PULL TO EXPLORE</strong></div><div class="reels" id="reels" aria-label="三个档案图案滚轮"><div class="reel"><div class="reel-track" id="reel0"></div></div><div class="reel"><div class="reel-track" id="reel1"></div></div><div class="reel"><div class="reel-track" id="reel2"></div></div></div></div><div class="lever-area"><button id="lever" class="lever" type="button" aria-label="向下拖动拉杆，松开后开始抽取" title="向下拉动，松开后转动"><span class="lever-base"></span><span class="lever-rail"></span><span class="lever-knob"></span></button><span class="lever-label">往下拉 ↓</span></div></div><div class="machine-bottom"><div class="machine-message"><span class="status-light"></span><span id="machineStatus" role="status" aria-live="polite">抓住右侧彩色球，往下拉，松手试试。</span></div><span class="machine-count" id="machineCounter">UNLOCKED 0 / 5</span></div></div>
 <div class="action-row"><a id="showAllButton" class="text-action" href="#archives">不想抽？直接看全部 ↗</a><a class="text-action" href="assets/Tan_Jiaqing_Resume.docx" download>下载 Word 简历 ↓</a><div class="progress" id="progressBar" aria-label="档案解锁进度"><span></span><span></span><span></span><span></span><span></span></div></div>
 </section><div class="shell"><div class="section-line"></div></div><section class="hero shell" aria-labelledby="page-title"><div><div class="overline"><span class="square"></span><span>START HERE</span><span class="muted">/ QUICK INTRO</span></div><h1 id="page-title">我喜欢把复杂问题拆开，<br/>再一步一步做清楚。</h1><p class="hero-desc">你好，我是谭佳庆，中国石油大学（北京）计算机科学与技术本科生。现在主要在做 Crossing，也在持续补工程基础、机器学习和 Agent 相关能力。</p><div class="hero-tags"><span class="pill"><span class="dot"></span>AI Agent · 实习方向</span><span class="pill"><span class="dot"></span>研究助理 / LLM · RL</span><span class="pill"><span class="dot"></span>北京</span></div></div><div class="hero-graphic" aria-label="由学习节点连线构成的抽象系统结构示意图" role="img"><span class="hero-graphic-caption">SYSTEM THINKING / 01</span><div class="graph-system"><svg viewBox="0 0 290 235" aria-hidden="true"><path class="route" d="M145 109 68 46M145 109l81-58M145 109l-85 86M145 109l178 90"/><path class="route" d="M68 46 226 51 323 199M60 195 232 197"/><rect class="graph-node" x="36" y="24" width="63" height="45" rx="7"/><rect class="graph-node" x="195" y="27" width="66" height="47" rx="7"/><rect class="graph-node inner" x="29" y="170" width="66" height="47" rx="7"/><rect class="graph-node" x="203" y="173" width="55" height="47" rx="7"/><rect class="graph-node primary" x="103" y="83" width="84" height="54" rx="9"/><text x="145" y="116" text-anchor="middle" font-family="monospace" font-size="19" font-weight="bold" fill="#0d0d0d">AGENT</text><circle cx="68" cy="46" r="8" fill="#858be7" stroke="#0d0d0d" stroke-width="2"/><circle cx="228" cy="50" r="8" fill="#858be7" stroke="#0d0d0d" stroke-width="2"/><circle cx="62" cy="192" r="8" fill="#858be7" stroke="#0d0d0d" stroke-width="2"/><circle cx="230" cy="196" r="8" fill="#858be7" stroke="#0d0d0d" stroke-width="2"/></svg></div><span class="hero-graphic-bottom">INPUT → MODEL → VALIDATION</span></div></section><div class="shell"><div class="section-line"></div></div>
 <section id="archives" class="shell" aria-labelledby="archive-title"><div class="section-intro"><div><p class="section-kicker">02 / ARCHIVE FILES</p><h2 class="section-title" id="archive-title">个人档案</h2></div><p class="section-aside">点击左侧页签切换内容。你也可以直接打开全部档案，不必依赖互动。</p></div>
@@ -139,32 +194,43 @@ html[data-theme="dark"] .text-action:hover{color:var(--brand)}
     if(busy)return;busy=true;spins+=1;
     const remaining=ids.filter(id=>!unlocked.has(id));
     const target=(remaining.length?remaining[Math.floor(Math.random()*remaining.length)]:randomId());
-    // Every fourth spin is a playful near-miss. The next spin always matches.
-    const isMiss=remaining.length>0 && spins%4===0 && misses===0;
-    const output=isMiss?[target,ids[(ids.indexOf(target)+1)%ids.length],target]:[target,target,target];
+    // Every complete pull reveals one document. No artificial near-misses.
+    const output=[target,target,target];
     lever.disabled=true;lever.classList.add('spinning');status.textContent='正在抽取下一页档案…';
     const wait=stopAt(output);
     window.setTimeout(()=>{
       busy=false;lever.disabled=false;lever.classList.remove('spinning');
-      if(isMiss){misses++;status.textContent='差一点就对齐了，再试一次。';return}
       misses=0;const isNew=!unlocked.has(target);unlocked.add(target);save();updateUI();showPanel(target,false);
       status.textContent=isNew?`已打开「${keyed[target].label}」，可以在下方继续查看。`:`再次打开「${keyed[target].label}」。`;
       if(unlocked.size===ids.length){status.textContent='五份档案都已经打开了，可以自由切换查看。'}
-      // On mobile, bring the revealed card into view; desktops keep the machine in view.
-      if(window.innerWidth<760)window.setTimeout(()=>document.getElementById('archives').scrollIntoView({behavior:reduced()?'instant':'smooth'}),250);
+      const machine=document.querySelector('.machine');
+      machine.classList.add('revealed');
+      window.setTimeout(()=>machine.classList.remove('revealed'),700);
+      // A successful match always reveals the specific card, on desktop and mobile.
+      // The section scrolls into view with the matching tab already selected.
+      window.setTimeout(()=>{
+        const section=document.getElementById('archives');
+        section.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'start'});
+      },reduced()?0:430);
     },wait);
   }
   tracks.forEach((t,i)=>t.innerHTML=cell(ids[i]));
-  // A real pull gesture: follow the pointer, bounce back on release, then spin.
-  let pointerStartY=0,pullDistance=0,pointerId=null;
-  const pullMax=82,pullThreshold=28;
+  // Responsive pointer-captured pull: tactile resistance, snap-back and single activation.
+  let startY=0,travel=0,pointerId=null,armed=false;
+  const pullMax=100,pullThreshold=57;
   function drawLever(distance){
-    lever.style.setProperty('--pull',String(Math.max(0,Math.min(1,distance/pullMax))));
+    const normalized=Math.max(0,Math.min(1,distance/pullMax));
+    lever.style.setProperty('--pull',normalized.toFixed(4));
+    lever.setAttribute('aria-valuenow',String(Math.round(normalized*100)));
   }
-  function resetLever(){lever.classList.remove('dragging');drawLever(0);pullDistance=0;pointerId=null;}
+  function resetLever(){
+    lever.classList.remove('dragging','armed');
+    drawLever(0);travel=0;pointerId=null;armed=false;
+  }
+  lever.setAttribute('aria-label','往下拖动拉杆，松开抽取一份档案');
   lever.addEventListener('pointerdown',e=>{
-    if(busy || lever.disabled || pointerId!==null)return;
-    pointerId=e.pointerId;pointerStartY=e.clientY;pullDistance=0;
+    if(busy||lever.disabled||pointerId!==null||e.button>0)return;
+    pointerId=e.pointerId;startY=e.clientY;travel=0;armed=false;
     lever.classList.add('dragging');
     lever.setPointerCapture(e.pointerId);
     drawLever(0);
@@ -172,20 +238,26 @@ html[data-theme="dark"] .text-action:hover{color:var(--brand)}
   });
   lever.addEventListener('pointermove',e=>{
     if(e.pointerId!==pointerId)return;
-    pullDistance=Math.max(0,Math.min(pullMax,e.clientY-pointerStartY));
-    drawLever(pullDistance);
+    const distance=Math.max(0,e.clientY-startY);
+    // Mild resistance near the end of the travel makes the device feel mechanical.
+    travel=distance<=70?distance:70+(distance-70)*.52;
+    travel=Math.min(pullMax,travel);
+    drawLever(travel);
+    armed=travel>=pullThreshold;
+    lever.classList.toggle('armed',armed);
+    status.textContent=armed?'松开，开始抽取。':'继续往下拉…';
   });
   lever.addEventListener('pointerup',e=>{
     if(e.pointerId!==pointerId)return;
-    const moved=pullDistance;
+    const shouldSpin=armed;
     resetLever();
-    // A tap is supported too, but the lever remains the sole spin control.
-    if(!busy && (moved>=pullThreshold || moved<10))spin();
+    if(shouldSpin&&!busy){spin()}else if(!busy){status.textContent='再拉低一点，就能启动。'}
   });
   lever.addEventListener('pointercancel',resetLever);
   lever.addEventListener('lostpointercapture',()=>{if(pointerId!==null)resetLever()});
+  // Keyboard accessibility remains available without adding a second visual button.
   lever.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===' ')&&!e.repeat){e.preventDefault();spin()}
+    if((e.key==='Enter'||e.key===' ')&&!e.repeat){e.preventDefault();if(!busy)spin()}
   });
   document.getElementById('showAllButton').addEventListener('click',()=>{ids.forEach(id=>unlocked.add(id));save();updateUI();showPanel('profile',true);status.textContent='全部档案已打开，请在下方页签中切换查看。'});
   const themeButton=document.getElementById('themeButton');
