@@ -156,6 +156,46 @@ html[data-theme="dark"] .project-metric strong{color:var(--brand)}
 .project-links{display:flex;flex-wrap:wrap;gap:13px;margin-top:13px;font-size:11.5px;font-weight:750}
 .project-links a{text-decoration:underline;text-decoration-color:var(--brand);text-underline-offset:4px}
 @media(max-width:760px){.project-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.project-metric strong{font-size:20px}}
+
+/* Interactive detail panels */
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:15px 0}
+.detail-trigger{display:block;width:100%;text-align:left;padding:15px 16px;border:1.5px solid var(--line);border-radius:9px;background:var(--surface);color:var(--fg);cursor:pointer;transition:transform .16s,border-color .16s,box-shadow .16s}
+.detail-trigger:hover,.detail-trigger:focus-visible{transform:translateY(-2px);border-color:var(--border);box-shadow:3px 3px 0 var(--border)}
+.detail-trigger .detail-overline{display:block;font:10px var(--mono);letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.detail-trigger strong{display:block;font-size:14px;margin-bottom:6px}
+.detail-trigger span:last-child{display:block;color:var(--muted);font-size:11.5px;line-height:1.7}
+.level-list{display:grid;gap:8px;margin-top:13px}
+.level-row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--bg)}
+.level-row strong{font-size:12px}
+.level-row small{display:block;color:var(--muted);font-size:10.5px;line-height:1.6;margin-top:3px}
+.level-tag{white-space:nowrap;padding:5px 8px;border-radius:5px;background:var(--plate);font-size:10px;font-weight:800;color:var(--purple-deep)}
+html[data-theme="dark"] .level-tag{color:var(--brand)}
+.inline-detail{margin-left:8px;border:0;background:transparent;color:var(--purple-deep);font-size:10px;font-weight:800;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+html[data-theme="dark"] .inline-detail{color:var(--brand)}
+.modal-backdrop{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(10,10,16,.58);backdrop-filter:blur(7px)}
+.modal-backdrop.open{display:flex;animation:modalFade .16s ease-out}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+.detail-modal{width:min(760px,100%);max-height:min(84vh,900px);overflow:auto;background:var(--bg);color:var(--fg);border:2px solid var(--border);border-radius:14px;box-shadow:8px 8px 0 rgba(0,0,0,.28);animation:modalRise .2s ease-out}
+@keyframes modalRise{from{opacity:.7;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;gap:15px;align-items:start;padding:20px 23px;border-bottom:1.5px solid var(--line);background:var(--bg)}
+.modal-kicker{font:10px var(--mono);letter-spacing:.13em;color:var(--muted);margin-bottom:7px}
+.modal-head h3{font-size:23px;letter-spacing:-.04em;line-height:1.3}
+.modal-close{width:37px;height:37px;flex:none;border:1.5px solid var(--border);border-radius:7px;background:var(--surface);color:var(--fg);font-size:20px;line-height:1}
+.modal-close:hover{background:var(--brand);color:#111}
+.modal-content{padding:22px 24px 27px}
+.modal-content h4{font-size:14px;margin:19px 0 8px}
+.modal-content h4:first-child{margin-top:0}
+.modal-content p,.modal-content li{font-size:12.5px;line-height:1.9;color:var(--muted)}
+.modal-content ul{padding-left:19px;margin:8px 0}
+.modal-content li+li{margin-top:5px}
+.modal-callout{padding:13px 15px;border-left:4px solid var(--brand);background:var(--plate);margin:14px 0;font-size:12px;line-height:1.85}
+.modal-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:13px 0}
+.modal-mini{padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.modal-mini strong{display:block;font-size:12px;margin-bottom:5px}
+.modal-mini p{font-size:11px}
+body.modal-open{overflow:hidden}
+@media(max-width:760px){.detail-grid{grid-template-columns:1fr}.modal-backdrop{padding:10px}.detail-modal{max-height:90vh;border-radius:11px}.modal-head{padding:16px}.modal-content{padding:17px 16px 21px}.modal-head h3{font-size:20px}.modal-columns{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -181,22 +221,87 @@ html[data-theme="dark"] .project-metric strong{color:var(--brand)}
 <div class="archive-panel"><div class="panel-heading"><div><p class="panel-code" id="panelCode">FILE 01 / PROFILE.JSON</p><h3 id="panelTitle">个人信息</h3></div><span class="panel-stamp" id="panelStamp">READY</span></div><div class="panel-body">
 <article class="archive-content active" data-panel="profile"><p class="lead">我叫谭佳庆，在中国石油大学（北京）读计算机科学与技术。平时一边做产品，一边写代码；喜欢把一个模糊的问题拆成清楚的流程，再动手做出来。</p><div class="info-grid"><div class="info-row"><div class="info-label">NAME / 姓名</div><div class="info-value">谭佳庆 · TAN JIAQING</div></div><div class="info-row"><div class="info-label">LOCATION / 意向城市</div><div class="info-value">北京 · 广州</div></div><div class="info-row"><div class="info-label">EDUCATION / 教育</div><div class="info-value">中国石油大学（北京）· 计算机科学与技术</div></div><div class="info-row"><div class="info-label">GRADUATION / 毕业</div><div class="info-value">2028 年 6 月（预计）</div></div><div class="info-row"><div class="info-label">PHONE / 电话</div><div class="info-value"><a href="tel:19591595659">19591595659</a></div></div><div class="info-row"><div class="info-label">GITHUB / 代码档案</div><div class="info-value"><a href="https://github.com/bioll-web" target="_blank" rel="noopener noreferrer">github.com/bioll-web ↗</a></div></div></div><p class="body-copy">求职方向：LLM / Agent 科研助理、AI Agent 产品经理。英语 CET-4。项目经历、技术记录与代码仓库见 GitHub。</p></article>
 <article class="archive-content" data-panel="works">
-<div class="project"><div class="project-top"><div><div class="project-title">Crossing · AI Agent 学习工作台</div><div class="project-role">项目发起人 / 产品设计与原型开发 · 2026.09—至今</div></div><span class="project-state">持续迭代</span></div><p>面向计算机学习者，把课程大纲、知识图谱、练习和学习记录放进同一个桌面工作台，帮助用户找到知识盲点、安排下一步学习。</p><div class="project-metrics"><div class="project-metric"><strong>122</strong><span>服务测试项通过</span></div><div class="project-metric"><strong>36</strong><span>服务测试脚本</span></div><div class="project-metric"><strong>9 组</strong><span>桌面端回归检查</span></div><div class="project-metric"><strong>16 项</strong><span>T65–T80 迭代验收</span></div></div><ul><li><strong>产品设计：</strong>设计“知识组织—初始测评—学习练习—复测反馈”流程；统一大纲与图谱的数据结构，规划知识节点和白、黄、红、绿四级学习状态。</li><li><strong>功能交付：</strong>完成 Theia / Electron 桌面原型，落地本地知识编辑、文档与文件关联、草稿恢复、练习作答与复测、52 周学习热力图等功能。</li><li><strong>工程验证：</strong>36 个服务测试脚本覆盖 122 项检查，全部通过（0 失败、0 跳过）；Electron 桌面端两轮回归完成 9 组检查，覆盖保存、关联、退出和重启恢复。</li><li><strong>项目推进：</strong>把产品需求拆成迭代任务，通过 GitHub 跟踪开发与验收；向同学、朋友和老师演示原型，根据反馈调整交互与功能优先级。</li><li><strong>Agent 方向：</strong>围绕 Agent Loop、节点级 RAG、工具调用、上下文管理和引导式问答设计后续集成方案。</li></ul><div class="tagline"><span class="tech">Theia</span><span class="tech">Electron</span><span class="tech">TypeScript</span><span class="tech">SQLite</span><span class="tech">Node.js</span><span class="tech">Agent / RAG</span></div><div class="project-links"><a href="https://github.com/bioll-web/Crossing-three" target="_blank" rel="noopener noreferrer">Crossing-three 工程仓库（私有）↗</a><a href="https://github.com/bioll-web/Crossing-VS" target="_blank" rel="noopener noreferrer">Crossing-VS ↗</a><a href="https://bioll-web.github.io/Crossing/" target="_blank" rel="noopener noreferrer">技术日志 ↗</a></div></div>
+<div class="project"><div class="project-top"><div><div class="project-title">Crossing · AI Agent 学习工作台</div> <button class="inline-detail" type="button" data-detail-open="crossing" aria-haspopup="dialog">查看项目细节 ↗</button><div class="project-role">项目发起人 / 产品设计与原型开发 · 2026.09—至今</div></div><span class="project-state">持续迭代</span></div><p>面向计算机学习者，把课程大纲、知识图谱、练习和学习记录放进同一个桌面工作台，帮助用户找到知识盲点、安排下一步学习。</p><div class="project-metrics"><div class="project-metric"><strong>122</strong><span>服务测试项通过</span></div><div class="project-metric"><strong>36</strong><span>服务测试脚本</span></div><div class="project-metric"><strong>9 组</strong><span>桌面端回归检查</span></div><div class="project-metric"><strong>16 项</strong><span>T65–T80 迭代验收</span></div></div><ul><li><strong>产品设计：</strong>设计“知识组织—初始测评—学习练习—复测反馈”流程；统一大纲与图谱的数据结构，规划知识节点和白、黄、红、绿四级学习状态。</li><li><strong>功能交付：</strong>完成 Theia / Electron 桌面原型，落地本地知识编辑、文档与文件关联、草稿恢复、练习作答与复测、52 周学习热力图等功能。</li><li><strong>工程验证：</strong>36 个服务测试脚本覆盖 122 项检查，全部通过（0 失败、0 跳过）；Electron 桌面端两轮回归完成 9 组检查，覆盖保存、关联、退出和重启恢复。</li><li><strong>项目推进：</strong>把产品需求拆成迭代任务，通过 GitHub 跟踪开发与验收；向同学、朋友和老师演示原型，根据反馈调整交互与功能优先级。</li><li><strong>Agent 方向：</strong>围绕 Agent Loop、节点级 RAG、工具调用、上下文管理和引导式问答设计后续集成方案。</li></ul><div class="tagline"><span class="tech">Theia</span><span class="tech">Electron</span><span class="tech">TypeScript</span><span class="tech">SQLite</span><span class="tech">Node.js</span><span class="tech">Agent / RAG</span></div><div class="project-links"><a href="https://github.com/bioll-web/Crossing-three" target="_blank" rel="noopener noreferrer">Crossing-three 工程仓库（私有）↗</a><a href="https://github.com/bioll-web/Crossing-VS" target="_blank" rel="noopener noreferrer">Crossing-VS ↗</a><a href="https://bioll-web.github.io/Crossing/" target="_blank" rel="noopener noreferrer">技术日志 ↗</a></div></div>
 <div class="project"><div class="project-top"><div><div class="project-title">文有物 · AI 文学阅读产品</div><div class="project-role">个人项目 / 产品探索与 Web 原型 · 2026</div></div><span class="project-state">产品原型</span></div><p>从文学阅读中的背景知识分散、人物关系复杂和深度理解困难出发，规划知识图谱、人物关系与 AI 导读功能；使用 React、Vite 和 TypeScript 搭建 Web / PWA 原型，并梳理客户端、云端服务和模型调用方案。</p><div class="tagline"><span class="tech">React</span><span class="tech">Vite</span><span class="tech">TypeScript</span><span class="tech">PWA</span><span class="tech">LLM API</span></div><div class="project-links"><a href="https://github.com/bioll-web/Sumi" target="_blank" rel="noopener noreferrer">Sumi 工程仓库（私有）↗</a></div></div>
 <div class="project"><div class="project-top"><div><div class="project-title">小红书 · 个人内容账号运营</div><div class="project-role">选题策划 / 内容制作 / 用户反馈</div></div><span class="project-state">持续运营</span></div><div class="project-metrics"><div class="project-metric"><strong>1,488</strong><span>账号粉丝</span></div><div class="project-metric"><strong>5 万+</strong><span>累计浏览量</span></div><div class="project-metric"><strong>1.4 万</strong><span>单篇最高获赞藏</span></div><div class="project-metric"><strong>全流程</strong><span>独立选题到发布</span></div></div><p>围绕语文学习、文学阅读和内容表达持续做选题、撰稿、制作与发布；结合浏览和互动反馈调整内容角度与表达方式。数据为个人账号历史后台统计。</p></div>
 <p class="notice">Crossing 与 Sumi 的研发仓库目前为私有；可先查看公开技术日志，项目功能和开发过程也可以在面试中现场演示。</p>
 </article>
-<article class="archive-content" data-panel="skills"><div class="subsection"><div class="sub-title">产品设计与推进</div><div class="tagline"><span class="tech">用户场景分析</span><span class="tech">需求拆解</span><span class="tech">MVP 优先级</span><span class="tech">用户流程</span><span class="tech">交互原型</span><span class="tech">功能验收</span><span class="tech">反馈迭代</span></div></div><div class="subsection"><div class="sub-title">AI / Agent</div><div class="tagline"><span class="tech">LLM API</span><span class="tech">Prompt</span><span class="tech">Tool Calling</span><span class="tech">Agent Loop</span><span class="tech">Workflow</span><span class="tech">RAG</span><span class="tech">Context / State</span><span class="tech">模型评估</span></div></div><div class="subsection"><div class="sub-title">开发与工程</div><p class="body-copy">项目中使用 TypeScript、JavaScript、React、Vite、Node.js、Electron、Theia 和 SQLite；接触 NestJS、Fastify、PostgreSQL、OpenAPI、Vitest 与 Git / GitHub。具备 Python、C 语言基础，学习过数据结构、算法和机器学习基础方法。</p></div><div class="notice">常用工具：ChatGPT、Codex、XMind、ProcessOn。习惯先拆清需求和边界，再推进实现、测试和复盘。</div></article>
+<article class="archive-content" data-panel="skills">
+<p class="lead">技术能力主要来自 Crossing 和文有物的持续开发。前端与桌面端有连续项目实践；后端、数据和 AI 部分按实际参与深度展开。</p>
+<div class="detail-grid">
+<button class="detail-trigger" data-detail-open="frontend" type="button" aria-haspopup="dialog"><span class="detail-overline">01 / FRONTEND & DESKTOP</span><strong>前端与桌面应用</strong><span>TypeScript、JavaScript、React、Vite、Electron、Theia · 项目实践</span></button>
+<button class="detail-trigger" data-detail-open="backend" type="button" aria-haspopup="dialog"><span class="detail-overline">02 / BACKEND & DATA</span><strong>后端与数据</strong><span>Node.js、NestJS、Fastify、SQLite、PostgreSQL · 工程实践</span></button>
+<button class="detail-trigger" data-detail-open="llm" type="button" aria-haspopup="dialog"><span class="detail-overline">03 / LLM & AGENT</span><strong>大模型与 Agent</strong><span>LLM Wiki、RAG、Tool Calling、Agent Loop、Context / State</span></button>
+<button class="detail-trigger" data-detail-open="tools" type="button" aria-haspopup="dialog"><span class="detail-overline">04 / RESEARCH TOOLKIT</span><strong>科研与工程工具</strong><span>Git / GitHub、测试验收、技术文档、XMind、ProcessOn</span></button>
+</div>
+<h4>技术栈目前的实际水平</h4>
+<div class="level-list">
+<div class="level-row"><div><strong>TypeScript / JavaScript</strong><small>参与 Crossing 界面、交互和桌面端功能开发，能阅读、修改和调试项目代码。</small></div><span class="level-tag">项目实践</span></div>
+<div class="level-row"><div><strong>React / Vite</strong><small>用于 Web / PWA 原型和交互页面开发，熟悉常见组件与页面组织方式。</small></div><span class="level-tag">项目实践</span></div>
+<div class="level-row"><div><strong>Electron / Theia</strong><small>用于桌面工作台构建、产品扩展和本地工作流验证。</small></div><span class="level-tag">项目实践</span></div>
+<div class="level-row"><div><strong>SQLite</strong><small>参与本地数据结构、持久化、版本迁移、事务和数据恢复相关功能。</small></div><span class="level-tag">项目实践</span></div>
+<div class="level-row"><div><strong>Node.js / NestJS / Fastify</strong><small>接触 API 服务、模块拆分、接口契约和服务测试，具备后端工程基础。</small></div><span class="level-tag">基础实践</span></div>
+<div class="level-row"><div><strong>PostgreSQL / OpenAPI / 测试工具</strong><small>在后端工程与测试流程中使用或验证，理解数据服务和接口契约的基本协作方式。</small></div><span class="level-tag">使用与理解</span></div>
+<div class="level-row"><div><strong>Python / C</strong><small>具备语言基础，正在加强算法、数据处理和独立编码能力。</small></div><span class="level-tag">基础</span></div>
+</div>
+<div class="notice">点击上方卡片，可以查看每一块技术具体用在什么地方，以及目前能做到什么程度。</div>
+</article>
 <article class="archive-content" data-panel="interests"><p class="lead">除了写代码，我也长期关注文学、电影与知识如何被更好地表达。</p><div class="interest-grid" style="margin-top:18px"><div class="interest"><svg><use href="#sym-book"/></svg><strong>文学与阅读</strong><p>喜欢从文本结构、人物关系和语境中寻找意义；文有物项目也由此出发。</p></div><div class="interest"><svg><use href="#sym-cinema"/></svg><strong>电影与叙事</strong><p>关注影像的叙事语言、情绪表达以及文学与电影之间的连接。</p></div><div class="interest"><svg><use href="#sym-pen"/></svg><strong>技术写作</strong><p>把技术学习过程拆解成可检索、可复盘的笔记与结构化文档。</p></div><div class="interest"><svg><use href="#sym-chat"/></svg><strong>教学与表达</strong><p>有教学和内容表达实践，重视如何将抽象概念讲清楚。</p></div></div><p class="notice">这些兴趣也会反过来影响我做产品：我不只关心功能本身，也关心它有没有把内容表达清楚。</p></article>
-<article class="archive-content" data-panel="research"><p class="lead">科研助理方向：LLM 与 Agent 系统。重点关注模型推理、Agent 决策、上下文管理和效果评估。</p><div class="research-step"><span class="num">01</span><div><strong>LLM 推理与模型评估</strong><p>关注模型输出质量、推理过程、Prompt 与上下文对结果的影响，以及可复现的评估指标。</p></div></div><div class="research-step"><span class="num">02</span><div><strong>Agent 规划与工具调用</strong><p>研究 Agent Loop、任务规划、Tool Calling、状态管理与多步骤任务执行，关注执行过程的可靠性。</p></div></div><div class="research-step"><span class="num">03</span><div><strong>RAG 与知识追踪</strong><p>关注节点级检索、上下文组织、学习证据、知识掌握度评估和间隔复测，探索检索与反馈如何改善学习体验。</p></div></div><div class="research-step"><span class="num">04</span><div><strong>实验与研究工程</strong><p>希望参与论文检索与阅读、实验环境搭建、代码复现、数据处理、评估脚本编写和结果分析。</p></div></div><p class="notice">关注方向：LLM / Agent 系统、模型评估、RAG、知识追踪与 AI 教育应用。</p></article>
+<article class="archive-content" data-panel="research">
+<p class="lead">科研助理方向：LLM 与 Agent 系统。关注模型如何组织知识、检索上下文、执行工具，以及怎样评估输出和任务结果。</p>
+<div class="detail-grid">
+<button class="detail-trigger" data-detail-open="wiki" type="button" aria-haspopup="dialog"><span class="detail-overline">01 / LLM WIKI & KNOWLEDGE</span><strong>LLM Wiki 与知识工程</strong><span>持续维护的知识资产、来源追踪、交叉引用、增量更新和知识结构。</span></button>
+<button class="detail-trigger" data-detail-open="rag" type="button" aria-haspopup="dialog"><span class="detail-overline">02 / RETRIEVAL</span><strong>Hybrid RAG 与 GraphRAG</strong><span>关键词、向量、元数据和图关系协同检索。</span></button>
+<button class="detail-trigger" data-detail-open="context" type="button" aria-haspopup="dialog"><span class="detail-overline">03 / CONTEXT ENGINEERING</span><strong>Context Engineering 与 Agent Runtime</strong><span>Context Builder、Router、Memory、State、Tool Calling 和执行边界。</span></button>
+<button class="detail-trigger" data-detail-open="evaluation" type="button" aria-haspopup="dialog"><span class="detail-overline">04 / EVALUATION</span><strong>学习证据与模型评估</strong><span>Evidence、Learner Model、知识追踪、复测和可解释的状态更新。</span></button>
+</div>
+<div class="detail-grid"><button class="detail-trigger" data-detail-open="product" type="button" aria-haspopup="dialog"><span class="detail-overline">PRODUCT DESIGN / CROSSING</span><strong>AI Agent 产品设计方法</strong><span>用户问题、学习闭环、Socratic First，以及 Agent 与业务服务的职责边界。</span></button></div>
+<h4>持续关注的研究问题</h4>
+<div class="research-step"><span class="num">01</span><div><strong>怎样让知识库越用越有价值？</strong><p>原始文档、结构化知识和个人笔记如何持续更新、互相引用，并保留来源与版本。</p></div></div>
+<div class="research-step"><span class="num">02</span><div><strong>怎样为 Agent 准备真正有用的上下文？</strong><p>从用户意图、知识节点、关系范围和学习状态中构建小而准确的 context，而不是把整份资料塞进 Prompt。</p></div></div>
+<div class="research-step"><span class="num">03</span><div><strong>怎样判断一次回答或学习结果是否可信？</strong><p>把来源、作答、错误类型和复测结果作为证据，避免仅凭一次对话就改变用户的掌握状态。</p></div></div>
+</article>
 </div></div></div>
 </section>
 </main>
 <section id="contact" class="contact"><div class="shell contact-grid"><div><p class="section-kicker">03 / WORK TOGETHER</p><h2>在做 LLM / Agent？欢迎认识一下。</h2><p>求职方向：LLM / Agent 科研助理、AI Agent 产品经理实习。意向城市：北京、广州。欢迎交流研究问题、产品想法和项目合作。</p><div class="contact-actions"><a href="tel:19591595659" class="btn btn-primary">☎ &nbsp; 19591595659</a><a href="https://github.com/bioll-web" class="btn" target="_blank" rel="noopener noreferrer">↗ &nbsp; GitHub</a></div></div><div style="font-size:clamp(75px,12vw,170px);font-weight:900;letter-spacing:-.12em;line-height:1;color:var(--brand);text-shadow:3px 3px 0 var(--border);white-space:nowrap;padding-right:15px" aria-hidden="true">T.</div></div></section>
 <footer class="footer"><div class="shell footer-row"><span>© 2026 TAN JIAQING · INTERACTIVE RESUME.</span></div></footer>
+<div class="modal-backdrop" id="resumeDetailModal" aria-hidden="true"><section class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="resumeModalTitle" tabindex="-1"><header class="modal-head"><div><div class="modal-kicker" id="resumeModalKicker"></div><h3 id="resumeModalTitle"></h3></div><button class="modal-close" type="button" id="resumeModalClose" aria-label="关闭详情">×</button></header><div class="modal-content" id="resumeModalContent"></div></section></div>
 <script>
 (() => {
   'use strict';
+  const detailData = {"frontend":["前端与桌面应用","01 / FRONTEND & DESKTOP","<h4>前端与桌面应用</h4><p>这是目前项目经验最连续的一块。Crossing 以 Theia 为工作台底座，使用 Electron 承载桌面端，再围绕知识编辑、文档和学习流程开发产品界面。</p><ul><li><b>TypeScript / JavaScript：</b>参与界面、交互逻辑、Theia 扩展和桌面工作流开发，能够阅读、修改、调试已有工程代码。</li><li><b>React / Vite：</b>用于文有物 Web / PWA 原型及相关界面组件。</li><li><b>Electron / Theia：</b>参与 Browser 与 Electron 两种运行形态的集成，处理工作区、编辑器、页签、分屏和产品扩展。</li><li><b>交互实践：</b>文件与知识对象打开、固定页签、分屏、草稿恢复、主题、窄屏适配和键盘操作。</li></ul><div class=\"modal-callout\">目前能够在已有工程中完成具体界面和交互任务，阅读代码、调试并检查实现结果；复杂底层框架开发仍在积累。</div>"],"backend":["后端与数据","02 / BACKEND & DATA","<h4>后端与数据</h4><p>Crossing 的本地数据和服务链路，是项目工程实践的重要部分。关注点主要是数据一致性、可恢复性和业务操作是否可验证。</p><ul><li><b>SQLite：</b>参与知识结构、文档、练习记录和学习活动的数据建模；接触 schema 迁移、事务、revision 校验、备份和重启恢复。</li><li><b>Node.js：</b>用于桌面端服务、脚本、测试工具和后端工程协作。</li><li><b>NestJS / Fastify：</b>在 Crossing-Back 模块化后端骨架中接触 API、领域契约、Worker 和健康检查。</li><li><b>PostgreSQL / OpenAPI / 测试：</b>参与工程验证与接口测试流程，理解数据服务和接口契约的基本协作方式。</li></ul><div class=\"modal-callout\">本地数据链路和功能验收有实际项目经验；云端后端仍在逐步完善。</div>"],"llm":["大模型与 Agent","03 / LLM & AGENT","<h4>大模型与 Agent</h4><p>在 Crossing 中，AI 不只是聊天窗口，而是围绕用户当前知识、任务和学习状态工作的执行系统。</p><div class=\"modal-columns\"><div class=\"modal-mini\"><strong>LLM 应用</strong><p>Prompt 设计、模型 API、上下文组织、结构化输出和结果检查。</p></div><div class=\"modal-mini\"><strong>Agent 机制</strong><p>Agent Loop、Workflow、Tool Calling、State、Memory 和任务路由。</p></div></div><ul><li>理解 Agent 的基本循环：接收意图、整理上下文、制定下一步、调用工具、读取结果，再决定继续或结束。</li><li>在产品方案中区分 LLM 自主决策与后端确定性执行；重要数据写入由业务服务校验。</li><li>围绕本地轻量任务与云端复杂推理，设计 Fast Path / Deep Path 思路。</li></ul><div class=\"modal-callout\">目前主要是 LLM / Agent 架构理解、产品方案设计和原型集成规划经验。</div>"],"tools":["科研与工程工具","04 / RESEARCH TOOLKIT","<h4>科研与工程工具</h4><p>日常使用 Git / GitHub 管理项目和版本，通过任务清单、验收记录与测试结果追踪开发进度；使用 XMind、ProcessOn 梳理产品结构、流程和知识关系。</p><ul><li>测试验收：阅读测试结果、定位失败场景、复核功能行为。</li><li>技术文档：整理架构决策、接口约束、实现边界和复现步骤。</li><li>AI 辅助开发：使用 ChatGPT、Codex 辅助理解代码、拆分任务、生成修改方案，再通过构建、测试和实际界面检查结果。</li></ul>"],"wiki":["LLM Wiki 与知识工程","01 / LLM WIKI & KNOWLEDGE","<h4>LLM Wiki 与知识工程</h4><p>你关注的 LLM Wiki，不是把文档切成 chunks 后临时检索，而是把资料持续整理成可维护、可引用、能不断补充的知识资产。</p><div class=\"modal-callout\"><b>讨论过的 Crossing 知识链路：</b><br>文档解析 → 结构化 Nodes → Hybrid RAG → LLM Wiki → Personal Wiki → Agent → 学习工作台</div><ul><li><b>LLM Wiki：</b>把原始资料编译成带来源、主题、交叉引用和更新记录的长期知识页面。</li><li><b>知识分层：</b>Course Wiki 记录“知识是什么”；Knowledge Graph 记录知识点之间的关系；Learner Model 记录“用户掌握得怎么样”。</li><li><b>增量维护：</b>关注新资料进入后的局部更新、来源追踪、知识冲突检测和上下文预算。</li><li><b>工具生态：</b>了解 LlamaIndex 的文档、Nodes、索引和检索组织方式，以及 LlamaParse 对复杂 PDF、表格和版式资料的解析用途。</li></ul><div class=\"modal-callout\">这部分主要体现 LLM Wiki 的工作方式、知识组织方法和在 Crossing 中的架构应用理解。</div>"],"rag":["Hybrid RAG 与 GraphRAG","02 / RETRIEVAL","<h4>Hybrid RAG 与 GraphRAG</h4><p>核心思路是先利用知识结构缩小检索范围，再在局部范围内查找具体内容，而不是对全部资料做一次无差别向量检索。</p><ul><li><b>Hybrid RAG：</b>组合关键词检索、向量检索和元数据过滤，兼顾精确术语与语义相关内容。</li><li><b>GraphRAG / 局部子图：</b>从知识节点及其前置、后继或相关关系出发，限定检索范围，再扩展相关内容。</li><li><b>Reranking：</b>结合用户意图、节点关系和学习证据，对候选内容重新排序。</li><li><b>路由：</b>根据问题类型决定查原始资料、Course Wiki、个人 Wiki 或知识图谱。</li></ul><div class=\"modal-callout\">这是已经讨论和设计过的检索方案；具体组件、评估数据集和线上效果仍需通过实现与实验验证。</div>"],"context":["Context Engineering 与 Agent Runtime","03 / CONTEXT ENGINEERING","<h4>Context Engineering 与 Agent Runtime</h4><p>重点不是无限扩大上下文，而是为当前任务构建刚好够用、来源清楚、能被工具消费的上下文。</p><ul><li><b>Intent Router：</b>识别用户意图，决定走本地导航、资料检索、学习诊断还是云端推理。</li><li><b>Context Builder：</b>组合当前节点、局部关系、关联资料、历史证据和学习状态，生成精简 context manifest。</li><li><b>Memory / State：</b>区分长期知识、当前任务状态和可追溯的学习证据。</li><li><b>Tool Calling：</b>由 Agent 选择工具，由确定性服务执行写入、校验和事务。</li><li><b>Evaluation：</b>检查任务是否完成、引用是否可靠、工具调用是否正确，并记录失败案例。</li></ul><div class=\"modal-callout\">讨论过的架构基线是单 Agent Runtime + 多 Skill / Workflow + 多 Tool，并自定义 Context Builder、Knowledge Router 和 Evidence Engine。</div>"],"evaluation":["学习证据与模型评估","04 / EVALUATION","<h4>学习证据与模型评估</h4><p>Crossing 的学习状态不应由一次聊天或一次点击决定，而应由可追溯的学习证据支持。</p><ul><li><b>Evidence：</b>记录练习题版本、作答结果、时间和关联知识节点。</li><li><b>Learner Model：</b>把证据汇总为节点级学习状态，并保留状态变化依据。</li><li><b>复测：</b>通过间隔复测观察知识掌握是否稳定，而非只看一次正确率。</li><li><b>状态展示：</b>白、黄、红、绿用于表达未学习、部分掌握、需要加强和已掌握等状态。</li></ul><div class=\"modal-callout\">目前已有本地练习、复测和学习证据切片；更完整的知识追踪模型、跨节点聚合和自适应调度仍是后续方向。</div>"],"product":["AI Agent 产品设计方法","ROLE / AI AGENT PRODUCT","<h4>AI Agent 产品设计方法</h4><p>做产品时，先从具体用户任务出发，再决定哪些步骤由界面、业务服务或 Agent 完成。</p><ul><li><b>用户问题：</b>知识资料分散、学习进度难判断、遇到问题时缺少针对性的下一步建议。</li><li><b>产品方案：</b>统一知识结构，围绕节点组织资料、练习和状态；通过测评与复测建立学习反馈。</li><li><b>交互原则：</b>Socratic First，优先通过追问帮助用户自己推导；需要时再提供定义、提示、相关图谱或练习。</li><li><b>Agent 边界：</b>模型负责理解、规划和生成建议；后端服务负责权限校验、状态更新和持久化。</li><li><b>MVP 推进：</b>优先交付可验证的学习流程，再逐步增加 Agent 能力。</li></ul>"],"crossing":["Crossing：从知识结构到学习闭环","PROJECT / CROSSING","<h4>Crossing：从知识结构到学习闭环</h4><p>项目从计算机专业学生的自主学习场景出发，希望把课程资料、知识结构、练习和学习反馈放在一个连续的工作流里。</p><ul><li>大纲与知识图谱共用一套知识结构，节点可关联资料、练习和学习证据。</li><li>学习流程：知识组织 → 初始诊断 → 针对性练习 → 复测 → 状态更新。</li><li>桌面工作台基于 Theia / Electron，支持本地知识编辑、文档与文件关联、草稿恢复和学习记录。</li><li>工程验证：36 个服务测试脚本覆盖 122 项检查，0 失败、0 跳过；桌面端两轮回归完成 9 组检查。</li></ul><div class=\"modal-callout\">目前最扎实的成果是桌面工作台和本地学习功能切片。Agent 的完整闭环仍在持续集成。</div>"]};
+  const detailModal = document.getElementById('resumeDetailModal');
+  const detailClose = document.getElementById('resumeModalClose');
+  const detailTitle = document.getElementById('resumeModalTitle');
+  const detailKicker = document.getElementById('resumeModalKicker');
+  const detailContent = document.getElementById('resumeModalContent');
+  let detailReturnFocus = null;
+  function openDetail(id, trigger) {
+    const item = detailData[id]; if (!item) return;
+    detailReturnFocus = trigger || document.activeElement;
+    detailTitle.textContent = item[0]; detailKicker.textContent = item[1]; detailContent.innerHTML = item[2];
+    detailModal.classList.add('open'); detailModal.setAttribute('aria-hidden','false');
+    document.body.classList.add('modal-open'); detailClose.focus();
+  }
+  function closeDetail() {
+    if (!detailModal.classList.contains('open')) return;
+    detailModal.classList.remove('open'); detailModal.setAttribute('aria-hidden','true');
+    document.body.classList.remove('modal-open');
+    if (detailReturnFocus && detailReturnFocus.focus) detailReturnFocus.focus();
+  }
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-detail-open]');
+    if (trigger) { openDetail(trigger.dataset.detailOpen, trigger); return; }
+    if (event.target === detailModal) closeDetail();
+  });
+  detailClose.addEventListener('click', closeDetail);
+  document.addEventListener('keydown', event => {
+    if (!detailModal.classList.contains('open')) return;
+    if (event.key === 'Escape') { event.preventDefault(); closeDetail(); return; }
+    if (event.key === 'Tab') { event.preventDefault(); detailClose.focus(); }
+  });
+
   const categories = [
     {id:'profile',label:'个人信息',eng:'PROFILE',file:'PROFILE.JSON'},
     {id:'works',label:'项目经历',eng:'PROJECTS',file:'PROJECTS.MD'},
